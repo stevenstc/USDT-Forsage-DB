@@ -24,11 +24,21 @@ module.exports = function(sequelize, DataTypes) {
             field: 'value',
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        createAt: {
+            field: 'create_at',
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updateAt: {
+            field: 'update_at',
+            type: DataTypes.DATE,
+            allowNull: false
         }
     },{
         schema: '',
         tableName: "profit",
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true
     });
     

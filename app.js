@@ -11,7 +11,7 @@ var glueManifest = {
     connections: [{
         host: config.server.host,
         port: config.server.port,
-        labels: ['Marina Melfi Api'],
+        labels: ['Monopoly Api'],
         routes: {
             cors: {
                 origin: ['*'],

@@ -4,24 +4,24 @@ const Joi = require('joi');
 module.exports = [
 	{
         method: 'POST',
-        path: '/faq/register',
+        path: '/user/register',
         config: {
             auth: false,
-            description: 'Insertar faq.',
-            notes: ['Inserta faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'create'}},
+            description: 'Insertar user.',
+            notes: ['Inserta una user.'],
+            tags: ['api', 'User'],
+            handler: {userHandler: {method: 'create'}},
             validate: {
                 payload: Joi.object({
-                    title: Joi.string().required().description('Title'),
-                    content: Joi.string().required().description('Content')
+                    name: Joi.string().required().description('Nombre'),
+                    lastname: Joi.string().required().description('Apellidos')
                 })
             },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido insertada satisfactoriamente.' },
-                        409: { description: 'Conflicto: Existe una faq con los datos especificados.' },
+                        201: { description: 'El user ha sido insertada satisfactoriamente.' },
+                        409: { description: 'Conflicto: Existe una user con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -30,24 +30,24 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/faq/{id}/edit',
+        path: '/user/{id}/edit',
         config: {
             auth: false,
-            description: 'Actualizar faq.',
-            notes: ['Actualizar una faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'update'}},
+            description: 'Actualizar user.',
+            notes: ['Actualizar un user.'],
+            tags: ['api', 'User'],
+            handler: {userHandler: {method: 'update'}},
             validate: {
                 payload: Joi.object({
-                    title: Joi.string().required().description('Title'),
-                    content: Joi.string().required().description('Content')
+                    name: Joi.string().required().description('Nombre'),
+                    lastname: Joi.string().required().description('Apellidos')
                 })
             },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido actualizado satisfactoriamente.' },
-                        409: { description: 'Conflicto: Existe una faq con los datos especificados.' },
+                        201: { description: 'El user ha sido actualizado satisfactoriamente.' },
+                        409: { description: 'Conflicto: Existe una user con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -56,19 +56,19 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/faq/{id}/remove',
+        path: '/user/{id}/remove',
         config: {
             auth: false,
-            description: 'Eliminar faq.',
-            notes: ['Eliminar faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'remove'}},
+            description: 'Eliminar user.',
+            notes: ['Eliminar user.'],
+            tags: ['api', 'User'],
+            handler: {userHandler: {method: 'remove'}},
             validate: { },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido eliminado satisfactoriamente.' },
-                        409: { description: 'Error: No existe un faq con los datos especificados.' },
+                        201: { description: 'El user ha sido eliminado satisfactoriamente.' },
+                        409: { description: 'Error: No existe un user con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -77,13 +77,13 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/faqs',
+        path: '/users',
         config: {
             auth: false,
-            description: 'Listar faqs.',
-            notes: ['Retorna un listado de faqs.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'getAll'}},
+            description: 'Listar users.',
+            notes: ['Retorna un listado de users.'],
+            tags: ['api', 'User'],
+            handler: {userHandler: {method: 'getAll'}},
             plugins: {
                 'hapi-swagger': {
                     responses: {
@@ -96,13 +96,13 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/faq/{id}',
+        path: '/user/{id}',
         config: {
             auth: false,
-            description: 'Obtener el faq.',
-            notes: ['Retorna un faq dado el identificador del usuario.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'getById'}},
+            description: 'Obtener el user.',
+            notes: ['Retorna un user dado el identificador del usuario.'],
+            tags: ['api', 'User'],
+            handler: {userHandler: {method: 'getById'}},
             validate: {
                 params: {
                     id: Joi.number().integer().required().description('Identificador.')

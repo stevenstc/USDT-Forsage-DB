@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    let entity = sequelize.define("profit", {
+    let entity = sequelize.define("user", {
         id: {
             field: 'id',
             type: DataTypes.INTEGER,
@@ -12,13 +12,13 @@ module.exports = function(sequelize, DataTypes) {
                 isInt: true
             }
         },
-        username: {
-            field: 'username',
+        name: {
+            field: 'name',
             type: DataTypes.STRING,
             allowNull: false
         },
-        password: {
-            field: 'password',
+        lastname: {
+            field: 'lastname',
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     },{
         schema: '',
-        tableName: "profit",
+        tableName: "user",
         timestamps: true,
         freezeTableName: true
     });

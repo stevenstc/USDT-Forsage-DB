@@ -10,7 +10,7 @@ class BaseHandler {
     }
 
     trigger(method, request, reply) {
-        this.em = request.getDbManager();
+        this.em = request.getDbManager();        
         return this[method].call(this, request, reply);
     }
 
@@ -40,7 +40,7 @@ class BaseHandler {
   
     getAll = async (request, reply) => {
         try {
-        const datas = await this.getModel().findAll();
+        const datas = await this.getModel().find();
         return reply({ data: datas});
         } catch (error) {
         //return res.status(500).send(error.message);
@@ -50,10 +50,10 @@ class BaseHandler {
   
     getById = async (request, reply) => {
         try {
-            const { id } = request.payload;
-            const data = await this.getModel().findOne({
-                where: { id: id }
-            });
+            const { id } = request.params;
+            const data = await this.getModel().findOne(
+                { _id: id }
+            );
             if (data) {
                 return reply({ data:data });
             }
@@ -67,12 +67,13 @@ class BaseHandler {
     update = async (request, reply) => {
         try {
         const { id } = request.params;
-        const [updated] = await this.getModel().update(request.payload, {
-            where: { id: id }
-        });
+        const updated = await this.getModel().updateOne(
+            { _id: id },
+            request.payload);
+            console.log(updated);
         if (updated) {
-            const updatedData = await this.getModel().findOne({ where: { id: id } });
-            return reply({ data: updatedData });
+            const data = await this.getModel().findOne({ _id: id });
+            return reply({ data: data });
         }
         return reply({ code: 2, msg: "Data not found" }).code(401);
         } catch (error) {
@@ -82,10 +83,10 @@ class BaseHandler {
   
     remove = async (request, reply) => {
         try {
-        const { id } = request.payload;
-        const deleted = await this.getModel().destroy({
-            where: { id: id }
-        });
+        const { id } = request.params;
+        const deleted = await this.getModel().remove(
+            { _id: id }
+        );
         if (deleted) {
             return reply({ msg: "Data deleted" });
         }

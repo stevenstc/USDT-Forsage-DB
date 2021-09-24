@@ -38,6 +38,9 @@ module.exports = [
             tags: ['api', 'User'],
             handler: {userHandler: {method: 'update'}},
             validate: {
+                params: {
+                    id: Joi.string().required().description('Identificador.')
+                },
                 payload: Joi.object({
                     name: Joi.string().required().description('Nombre'),
                     lastname: Joi.string().required().description('Apellidos')
@@ -63,7 +66,11 @@ module.exports = [
             notes: ['Eliminar user.'],
             tags: ['api', 'User'],
             handler: {userHandler: {method: 'remove'}},
-            validate: { },
+            validate: {
+                params: {
+                    id: Joi.string().required().description('Identificador.')
+                }
+            },
             plugins: {
                 'hapi-swagger': {
                     responses: {
@@ -105,7 +112,7 @@ module.exports = [
             handler: {userHandler: {method: 'getById'}},
             validate: {
                 params: {
-                    id: Joi.number().integer().required().description('Identificador.')
+                    id: Joi.string().required().description('Identificador.')
                 }
             },
             plugins: {

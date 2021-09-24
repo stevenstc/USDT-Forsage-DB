@@ -1,33 +1,18 @@
 "use strict";
-
-module.exports = function(sequelize, DataTypes) {
-    let entity = sequelize.define("faq", {
-        id: {
-            field: 'id',
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-            validate: {
-                isInt: true
-            }
-        },
+module.exports = function(mongoose) {
+    const schema = new mongoose.Schema({
         title: {
-            field: 'title',
-            type: DataTypes.STRING,
-            allowNull: false
+            type: String,
+			trim: true,
+			required: true,
         },
         content: {
-            field: 'content',
-            type: DataTypes.STRING,
-            allowNull: false
+            type: String,
+			trim: true,
+			required: true,
         }
     },{
-        schema: '',
-        tableName: "faq",
-        timestamps: false,
-        freezeTableName: true
+        collection: "faq"
     });
-    
-    return entity;
+    return mongoose.model("faq",schema);
 };

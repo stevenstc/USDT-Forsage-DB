@@ -27,7 +27,14 @@ var glueManifest = {
 		{ plugin: { register: './loader', options: config.loaders} },
         { plugin: { register: 'hapi-swagger', options: config.swagger} },
         { plugin: { register: './security' } },
-		{ plugin: {
+        { plugin: {
+                register: './odm',
+                options: {
+                    directory: config.loaders.directory,  // paths/globs to model files
+                }
+            }
+		}
+		/*{ plugin: {
                 register: './orm',
                 options: {
                     name: config.db.database, // identifier
@@ -37,7 +44,7 @@ var glueManifest = {
                     forceSync: false // force sync (drops tables) - default false,
                 }
             }
-		}
+		}*/
     ]
 };
 

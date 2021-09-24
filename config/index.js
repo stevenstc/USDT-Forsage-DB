@@ -3,28 +3,13 @@ const pkgJson = require('../package.json');
 require('dotenv').config();
 const server = {
 	host: 'localhost',
-	port: '3001',
-	dbhost: 'localhost',
-	dbport: '3306' //'27017'
+	port: '3001'
 };
 
 module.exports = {
 	server: {
 		host: server.host,
 		port: server.port
-	},
-	db: {
-		host: server.dbhost,
-		port: server.dbport,
-		database: "monopoly",
-		username: "root",
-		password: "",
-		dialect: "mysql",//"mongo",
-		pool: {
-			max: 5,
-			min: 0,
-			idle: 10000
-		}
 	},
 	loaders: {
 		directory: "/modules"
@@ -52,6 +37,7 @@ module.exports = {
 		tags: [
 			{ name: "Security" },
 			{ name: "Backoffice" },
+			{ name: "Profit" },
 			{ name: "Faqs" }
 		],
 		securityDefinitions: {

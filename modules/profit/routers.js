@@ -4,24 +4,24 @@ const Joi = require('joi');
 module.exports = [
 	{
         method: 'POST',
-        path: '/faq/register',
+        path: '/profit/register',
         config: {
             auth: false,
-            description: 'Insertar faq.',
-            notes: ['Inserta faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'create'}},
+            description: 'Insertar profit.',
+            notes: ['Inserta una profit.'],
+            tags: ['api', 'Profit'],
+            handler: {profitHandler: {method: 'create'}},
             validate: {
                 payload: Joi.object({
-                    title: Joi.string().required().description('Title'),
-                    content: Joi.string().required().description('Content')
+                    userId: Joi.string().required().description('Usuario'),
+                    value: Joi.number().integer().required().description('Valor')
                 })
             },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido insertada satisfactoriamente.' },
-                        409: { description: 'Conflicto: Existe una faq con los datos especificados.' },
+                        201: { description: 'El profit ha sido insertada satisfactoriamente.' },
+                        409: { description: 'Conflicto: Existe una profit con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -30,27 +30,27 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/faq/{id}/edit',
+        path: '/profit/{id}/edit',
         config: {
             auth: false,
-            description: 'Actualizar faq.',
-            notes: ['Actualizar una faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'update'}},
+            description: 'Actualizar profit.',
+            notes: ['Actualizar una profit.'],
+            tags: ['api', 'Profit'],
+            handler: {profitHandler: {method: 'update'}},
             validate: {
                 params: {
                     id: Joi.string().required().description('Identificador.')
                 },
                 payload: Joi.object({
-                    title: Joi.string().required().description('Title'),
-                    content: Joi.string().required().description('Content')
+                    userId: Joi.string().required().description('Usuario'),
+                    value: Joi.number().integer().required().description('Valor')
                 })
             },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido actualizado satisfactoriamente.' },
-                        409: { description: 'Conflicto: Existe una faq con los datos especificados.' },
+                        201: { description: 'El profit ha sido actualizado satisfactoriamente.' },
+                        409: { description: 'Conflicto: Existe una profit con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -59,23 +59,23 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/faq/{id}/remove',
+        path: '/profit/{id}/remove',
         config: {
             auth: false,
-            description: 'Eliminar faq.',
-            notes: ['Eliminar faq.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'remove'}},
-            validate: {
+            description: 'Eliminar profit.',
+            notes: ['Eliminar profit.'],
+            tags: ['api', 'Profit'],
+            handler: {profitHandler: {method: 'remove'}},
+            validate: {  
                 params: {
                     id: Joi.string().required().description('Identificador.')
                 }
-             },
+            },
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        201: { description: 'El faq ha sido eliminado satisfactoriamente.' },
-                        409: { description: 'Error: No existe un faq con los datos especificados.' },
+                        201: { description: 'El profit ha sido eliminado satisfactoriamente.' },
+                        409: { description: 'Error: No existe un profit con los datos especificados.' },
                         500: { description: 'Error interno del servidor.' }
                     }
                 }
@@ -84,13 +84,13 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/faqs',
+        path: '/profits',
         config: {
             auth: false,
-            description: 'Listar faqs.',
-            notes: ['Retorna un listado de faqs.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'getAll'}},
+            description: 'Listar profits.',
+            notes: ['Retorna un listado de profits.'],
+            tags: ['api', 'Profit'],
+            handler: {profitHandler: {method: 'getAll'}},
             plugins: {
                 'hapi-swagger': {
                     responses: {
@@ -103,16 +103,16 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/faq/{id}',
+        path: '/profit/{id}',
         config: {
             auth: false,
-            description: 'Obtener el faq.',
-            notes: ['Retorna un faq dado el identificador del usuario.'],
-            tags: ['api', 'Faqs'],
-            handler: {faqHandler: {method: 'getById'}},
+            description: 'Obtener el profit.',
+            notes: ['Retorna un profit dado el identificador del usuario.'],
+            tags: ['api', 'Profit'],
+            handler: {profitHandler: {method: 'getById'}},
             validate: {
                 params: {
-                    id: Joi.string().required().description('Identificador.')
+                    id: Joi.string().required().description('Identificador del user.')
                 }
             },
             plugins: {

@@ -1,43 +1,21 @@
 "use strict";
-
-module.exports = function(sequelize, DataTypes) {
-    let entity = sequelize.define("user", {
-        id: {
-            field: 'id',
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-            validate: {
-                isInt: true
-            }
-        },
+const timestamps = require('mongoose-timestamp');
+module.exports = function(mongoose) {
+    const schema = new mongoose.Schema({        
         name: {
-            field: 'name',
-            type: DataTypes.STRING,
-            allowNull: false
+            type: String,
+			trim: true,
+			required: true,
         },
         lastname: {
-            field: 'lastname',
-            type: DataTypes.STRING,
-            allowNull: false
+            type: String,
+			trim: true,
+			required: true,
         },
-        createAt: {
-            field: 'create_at',
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updateAt: {
-            field: 'update_at',
-            type: DataTypes.DATE,
-            allowNull: false
-        }
     },{
-        schema: '',
-        tableName: "user",
-        timestamps: true,
-        freezeTableName: true
+        collection: "user"
     });
     
-    return entity;
+    schema.plugin(timestamps);
+    return mongoose.model("user",schema);
 };
